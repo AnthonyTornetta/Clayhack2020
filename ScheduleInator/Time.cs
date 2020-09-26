@@ -35,5 +35,13 @@ namespace ScheduleInator
         {
             return !isAm();
         }
+
+        public override string ToString()
+        {
+            int hr = (Hours + 1) % 12;
+            if (isPm())
+                hr += 1;
+            return hr + ":" + Minutes + " " + (isAm() ? "AM" : "PM");
+        }
     }
 }
