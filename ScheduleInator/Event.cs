@@ -11,14 +11,23 @@ namespace ScheduleInator
         public string Name { get; set; }
         public string Type { get; set; }
         public CustomTime SpecifiedTime { get; set; }
-        public CustomTime dueDate;
+        public DateTime dueDate;
 
-        public Event(string name, string type, CustomTime dueDate, CustomTime specifiedTime )
+        public int ETA { get; set; }
+
+        public Event(string name, string type, DateTime dueDate, CustomTime specifiedTime )
         {
             this.SpecifiedTime = specifiedTime;
             this.Name = name;
             this.Type = type;
             this.dueDate = dueDate;
+        }
+
+        public Event(string name, string type, int eta)
+        {
+            this.Type = type;
+            this.Name = name;
+            this.ETA = eta;
         }
 
         public void ModifyTime(int day, Time time)

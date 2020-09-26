@@ -1,5 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -53,6 +51,14 @@ namespace ScheduleInator
 
         public void OrderEvents()
         {
+            // Step 1:
+            // Put in pre-determined times by user
+            // Step 2:
+            // Sort non predetermined events by their due date
+            // Put them in based off where they fit in order of their due date
+            // Step 3:
+            // Autofill the rest
+
             bool SwapEvent = false;
             for (int i = 0; i < events.Count; i++)
             {
