@@ -96,15 +96,10 @@
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="18*" />
-                    <ColumnDefinition Width="6*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="18*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Cool Event Name" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBlock>
-                <TextBlock Text="12:00 AM" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
-                <Button Style="{StaticResource btn-slick}" x:Name="btnModify" Content="*" Click="btnModify_Click" Grid.Row="0" Grid.Column="2"></Button>
-                <Button Style="{StaticResource btn-slick}" x:Name="btnRemove" Content="-" Click="btnRemove_Click" Grid.Row="0" Grid.Column="4"></Button>
 
                 <Button Style="{StaticResource btn-slick}" x:Name="btnAdd" Content="+" Click="btnAdd_Click" Grid.Row="1" Grid.Column="0"></Button>
             </Grid>

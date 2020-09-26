@@ -57,7 +57,7 @@ namespace ScheduleInator
             blocc.SetValue(Grid.RowProperty, row);
             blocc.SetValue(Grid.ColumnProperty, 0);
 
-            CustomTime time = e.StartTime;
+            CustomTime time = e.SpecifiedTime;
 
             TextBlock timeBlocc = new TextBlock
             {
@@ -65,15 +65,37 @@ namespace ScheduleInator
                 FontSize = 25,
                 VerticalAlignment = VerticalAlignment.Center
             };
-            blocc.SetValue(Grid.RowProperty, row);
-            blocc.SetValue(Grid.ColumnProperty, 0);
+            timeBlocc.SetValue(Grid.RowProperty, row);
+            timeBlocc.SetValue(Grid.ColumnProperty, 1);
 
+            Button btnModify = new Button()
+            {
+                Style = this.FindResource("btn-slick") as Style,
+                Content="*",
+            };
+            btnModify.SetValue(Grid.RowProperty, row);
+            btnModify.SetValue(Grid.ColumnProperty, 2);
+            btnModify.Click += btnModify_Click;
 
+            Button btnRemove = new Button()
+            {
+                Style = this.FindResource("btn-slick") as Style,
+                Content = "-"
+            };
+            btnRemove.SetValue(Grid.RowProperty, row);
+            btnRemove.SetValue(Grid.ColumnProperty, 3);
+            btnRemove.Click += btnRemove_Click;
 
-
-            lastElem.SetValue(Grid.RowProperty, row + 1);
+            gridEvents.Children.Remove(lastElem);
 
             gridEvents.Children.Add(blocc);
+            gridEvents.Children.Add(timeBlocc);
+            gridEvents.Children.Add(btnModify);
+            gridEvents.Children.Add(btnRemove);
+
+            gridEvents.Children.Add(lastElem);
+
+            lastElem.SetValue(Grid.RowProperty, row + 1);
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
@@ -83,7 +105,7 @@ namespace ScheduleInator
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            addEvent(new Event("Hello", "a", null, new CustomTime(new Time(0, 0), new Time(), new bool[7], true)));
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)

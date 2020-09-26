@@ -12,18 +12,38 @@ namespace ScheduleInator
 
         public int Minutes { get; set; }
 
+        public Time()
+        {
+            Hours = 0;
+            Minutes = 0;
+        }
+
+        public Time(int hr, int min)
+        {
+            Hours = hr;
+            Minutes = min;
+
+            reformat();
+        }
+
+        public void reformat()
+        {
+            int temp = Minutes % 60;
+            Hours += (Minutes - temp) / 60;
+            Minutes = temp;
+            Hours %= 24;
+        }
+
         public void addHours(int amt)
         {
             Hours += amt;
-            Hours %= amt;
+            reformat();
         }
 
         public void addMins(int amt)
         {
             Minutes += amt;
-            int temp = Minutes % 60;
-            Hours += (Minutes - temp) / 60;
-            Minutes = temp;
+            reformat();
         }
 
         public bool isAm()
@@ -38,10 +58,20 @@ namespace ScheduleInator
 
         public override string ToString()
         {
-            int hr = (Hours + 1) % 12;
-            if (isPm())
-                hr += 1;
-            return hr + ":" + Minutes + " " + (isAm() ? "AM" : "PM");
+            int hr = Hours % 12;
+            
+            if (hr == 0)
+                hr = 12;
+
+            if (isPm() && hr != 0)
+            {
+                hr++;
+            }
+
+            string hrS = hr + "";
+            string minS = Minutes < 10 ? "0" + Minutes : Minutes + "";
+
+            return hrS + ":" + minS + " " + (isAm() ? "AM" : "PM");
         }
     }
 }

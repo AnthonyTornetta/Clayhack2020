@@ -17,7 +17,7 @@ namespace ScheduleInator
             fileLines = System.IO.File.ReadAllLines(@"D:\Hackathons\Clayhack\Clayhack2020\ScheduleInator\UserList.txt");
         }
 
-        public List<Event> returnEvents()
+        /*public List<Event> returnEvents()
         { 
             List<Event> EventList = new List<Event>()
 
@@ -26,6 +26,6 @@ namespace ScheduleInator
             {
                 
             }       
-        }
+        }*/
     }
 }
