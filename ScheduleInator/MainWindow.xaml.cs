@@ -30,7 +30,7 @@ namespace ScheduleInator
 
         public void addEvent(Event e)
         {
-            
+            CustomTime start = e.StartTime;
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
