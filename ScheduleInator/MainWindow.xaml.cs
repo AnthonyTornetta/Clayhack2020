@@ -182,7 +182,37 @@ namespace ScheduleInator
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
+            for (int col = 0; col < 7; col++)
+            {
+                for (int row = 0; row < 24 * 2; row++)
+                {
+                    rects[col, row].Fill = new SolidColorBrush();
+                }
+            }
 
+            for(int i = 0; i < grdCalendar.Children.Count; i++)
+            {
+                if(grdCalendar.Children[i] is TextBlock)
+                {
+                    grdCalendar.Children.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            Time t = new Time();
+
+            for (int i = 0; i < 24 * 2; i++)
+            {
+                TextBlock txt = new TextBlock
+                {
+                    Text = t.ToString(),
+                    FontSize = 16
+                };
+                txt.SetValue(Grid.RowProperty, i);
+                grdCalendar.Children.Add(txt);
+
+                t.addMins(30);
+            }
         }
 
         private void gridTitle_MouseDown(object sender, MouseButtonEventArgs e)

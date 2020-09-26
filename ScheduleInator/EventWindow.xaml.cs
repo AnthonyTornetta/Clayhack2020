@@ -48,6 +48,9 @@ namespace ScheduleInator
                 string etaMin = window.etaMinutes.Text;
                 string etaHours = window.etaHours.Text;
 
+                if (etaHours.Equals("") || etaMin.Equals("") || name.Equals(""))
+                    return null;
+
                 Time eta = new Time(Int32.Parse(etaHours), Int32.Parse(etaMin));
 
                 return new Event(name, (DateTime)date, new CustomTime(days, false, eta));
