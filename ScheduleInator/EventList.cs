@@ -22,35 +22,36 @@ namespace ScheduleInator
 
         public void Add(Event e)
         {
-            AddPreDeterminedEvent(e);
-            AddDueDated(e);
-            AddETATimed(e);
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i].SpecifiedTime != null)
+                    AddPreDeterminedEvent(e);
+                else if (e.dueDate != null)
+                    AddDueDated(e);
+                else if (e.SpecifiedTime.StartTime == null && e.SpecifiedTime.EndTime == null)
+                    AddETATimed(e);
+                else
+                    AddAutofill(e);
+            }
         }
 
         public void AddPreDeterminedEvent(Event e)
         {
-            for (int i = 0; i < events.Count; i++)
-            {
-                if (events[i].SpecifiedTime != null)
-                {
-                    if (events[i].SpecifiedTime.StartTime.Hours < e.SpecifiedTime.EndTime.Hours)
-                        break;
-                    else if ((events[i].SpecifiedTime.StartTime.Hours == e.SpecifiedTime.EndTime.Hours) && (events[i].SpecifiedTime.StartTime.Minutes < e.SpecifiedTime.EndTime.Minutes))
-                        break;
-                    else if (events[i].SpecifiedTime.EndTime.Hours > e.SpecifiedTime.StartTime.Hours)
-                        break;
-                    else if ((events[i].SpecifiedTime.EndTime.Hours == e.SpecifiedTime.StartTime.Hours) && (events[i].SpecifiedTime.EndTime.Minutes > e.SpecifiedTime.StartTime.Minutes))
-                        break;
-                    else
-                        events.Add(e);
-                }
-            }
+            if (events[i].SpecifiedTime.StartTime.Hours < e.SpecifiedTime.EndTime.Hours)
+                break;
+            else if ((events[i].SpecifiedTime.StartTime.Hours == e.SpecifiedTime.EndTime.Hours) && (events[i].SpecifiedTime.StartTime.Minutes < e.SpecifiedTime.EndTime.Minutes))
+                break;
+            else if (events[i].SpecifiedTime.EndTime.Hours > e.SpecifiedTime.StartTime.Hours)
+                break;
+            else if ((events[i].SpecifiedTime.EndTime.Hours == e.SpecifiedTime.StartTime.Hours) && (events[i].SpecifiedTime.EndTime.Minutes > e.SpecifiedTime.StartTime.Minutes))
+                break;
+            else
+                events.Add(e);
         }
 
         public void AddDueDated(Event e)
         {
-            if (e.dueDate != null)
-                events.Add(e);
+            events.Add(e);
         }
 
         public void AddETATimed(Event e)
@@ -60,38 +61,35 @@ namespace ScheduleInator
             int i = 0;
             bool hasAddedEvent = false;
 
-            if (e.SpecifiedTime.StartTime == null && e.SpecifiedTime.EndTime == null)
+            while (i < events.Count - 1 || hasAddedEvent)
             {
-                while (i < events.Count - 1 || hasAddedEvent)
+                if (events[i].SpecifiedTime.EndTime.Hours < events[i + 1].SpecifiedTime.StartTime.Hours)
                 {
-                    if (events[i].SpecifiedTime.EndTime.Hours < events[i + 1].SpecifiedTime.StartTime.Hours)
-                    {
-                        allottedMins += 60 - events[i].SpecifiedTime.EndTime.Minutes;
-                        allottedMins += events[i + 1].SpecifiedTime.StartTime.Minutes;
+                    allottedMins += 60 - events[i].SpecifiedTime.EndTime.Minutes;
+                    allottedMins += events[i + 1].SpecifiedTime.StartTime.Minutes;
 
-                        int tempHours = events[i + 1].SpecifiedTime.StartTime.Hours - events[i].SpecifiedTime.EndTime.Hours;
+                    int tempHours = events[i + 1].SpecifiedTime.StartTime.Hours - events[i].SpecifiedTime.EndTime.Hours;
 
-                        if (tempHours > 2)
-                            allottedMins += 60 * (tempHours - 1);
+                    if (tempHours > 2)
+                        allottedMins += 60 * (tempHours - 1);
 
-                    }
-                    else if (events[i].SpecifiedTime.EndTime.Hours == events[i + 1].SpecifiedTime.StartTime.Hours)
-                        allottedMins = events[i + 1].SpecifiedTime.StartTime.Minutes - events[i].SpecifiedTime.EndTime.Minutes;
-
-                    etaMins = e.SpecifiedTime.eta.Hours * 60 + e.SpecifiedTime.eta.Minutes;
-
-                    if (etaMins <= allottedMins)
-                    {
-                        events.Add(e);
-                        hasAddedEvent = true;
-                    }
-
-                    i++;
                 }
+                else if (events[i].SpecifiedTime.EndTime.Hours == events[i + 1].SpecifiedTime.StartTime.Hours)
+                    allottedMins = events[i + 1].SpecifiedTime.StartTime.Minutes - events[i].SpecifiedTime.EndTime.Minutes;
+
+                etaMins = e.SpecifiedTime.eta.Hours * 60 + e.SpecifiedTime.eta.Minutes;
+
+                if (etaMins <= allottedMins)
+                {
+                    events.Add(e);
+                    hasAddedEvent = true;
+                }
+
+                i++;
             }
         }
 
-        public void autofill(Event e)
+        public void AddAutofill(Event e)
         {
             events.Add(e);
         }
