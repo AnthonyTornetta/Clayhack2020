@@ -5,8 +5,109 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScheduleInator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        FontFamily="Century Gothic" 
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Title="ScheduleInator"
+        ResizeMode="CanResizeWithGrip"
+        Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="btn-title" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="btn-title-close" TargetType="Button" BasedOn="{StaticResource btn-title}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="btn-slick" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#333" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button Name="btnCool" Content="Hello, World!" Click="btnCool_Click"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100px" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150px" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="#333" Grid.Row="1" Grid.Column="0">
+
+        </Grid>
+        <Grid Background="#F76902" Grid.Row="0" Grid.Column="0">
+
+        </Grid>
+        <Grid x:Name="gridTitle" MouseDown="gridTitle_MouseDown" Background="#333" Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="150" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="ScheduleInator" Grid.Column="0" Grid.Row="0" FontSize="30" Margin="30, 0, 0, 0" VerticalAlignment="Center" Foreground="#F76902"></TextBlock>
+
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnMinimize" Click="btnMinimize_Click" VerticalAlignment="Top" Grid.Column="0" Content="_" Style="{StaticResource btn-title}" />
+                <Button x:Name="btnResize" Click="btnResize_Click" VerticalAlignment="Top" Grid.Column="1" Content="☐" Style="{StaticResource btn-title}" />
+                <Button x:Name="btnClose" Click="btnClose_Click" VerticalAlignment="Top" Grid.Column="2" Content="X" Style="{StaticResource btn-title-close}" />
+            </Grid>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="10" x:Name="scrollEvents" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+            <Grid x:Name="gridEvents">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="18*" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="4*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Cool Event Name" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBlock>
+                <TextBlock Text="12:00 AM" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
+                <Button Style="{StaticResource btn-slick}" x:Name="btnModify" Content="*" Click="btnModify_Click" Grid.Row="0" Grid.Column="2"></Button>
+                <Button Style="{StaticResource btn-slick}" x:Name="btnAdd" Content="+" Click="btnAdd_Click" Grid.Row="0" Grid.Column="3"></Button>
+                <Button Style="{StaticResource btn-slick}" x:Name="btnRemove" Content="-" Click="btnRemove_Click" Grid.Row="0" Grid.Column="4"></Button>
+            </Grid>
+        </ScrollViewer>
+        
     </Grid>
 </Window>
