@@ -22,6 +22,7 @@ namespace ScheduleInator
     {
         public MainWindow()
         {
+
             InitializeComponent();
 
 

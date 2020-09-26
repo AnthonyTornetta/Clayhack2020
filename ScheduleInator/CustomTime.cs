@@ -9,7 +9,7 @@ namespace ScheduleInator
     /// <summary>
     /// Represents a collection of times that can occur during a week
     /// </summary>
-    class CustomTime
+    public class CustomTime
     {
         List<Time>[] times;
 
