@@ -8,17 +8,14 @@ namespace ScheduleInator
 {
     public class Event
     {
-        public CustomTime StartTime { get; set; }
-        public CustomTime EndTime { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        public CustomTime specifiedTime;
+        public CustomTime SpecifiedTime { get; set; }
         public CustomTime dueDate;
 
-        public Event(CustomTime startTime, CustomTime endTime, string name, string type, CustomTime dueDate, CustomTime specifiedTime )
+        public Event(string name, string type, CustomTime dueDate, CustomTime specifiedTime )
         {
-            this.StartTime = startTime;
-            this.EndTime = endTime;
+            this.SpecifiedTime = specifiedTime;
             this.Name = name;
             this.Type = type;
             this.dueDate = dueDate;
