@@ -105,7 +105,10 @@ namespace ScheduleInator
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            addEvent(new Event("Hello", "a", null, new CustomTime(new Time(0, 0), new Time(), new bool[7], true)));
+            Event ev = new Event("test", "event", DateTime.Today, new CustomTime(
+                new Time(10, 10), new Time(22, 0), new bool[7], true));
+
+            addEvent(ev);
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
