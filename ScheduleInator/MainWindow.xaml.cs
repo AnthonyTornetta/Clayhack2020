@@ -39,7 +39,10 @@ namespace ScheduleInator
 
             for(int i = 0; i < times.Count; i++)
             {
-                if (today.Hour < times[i].Hours; )
+                if (today.Hour < times[i].Hours)
+                {
+
+                }
             }
         }
 

@@ -12,34 +12,30 @@ namespace ScheduleInator
     /// </summary>
     public class CustomTime
     {
-        List<Time>[] times;
+        Time time { get; set; }
+        bool[] days;
+        bool FixedTime { get; set; }
+
+        public bool this[int i]
+        {
+            get { return days[i]; }
+            set { days[i] = value; }
+        }
 
         public CustomTime()
         {
-            times = new List<Time>[7];
+            time = new Time();
+            days = new bool[7];
         }
 
-        public CustomTime(List<Time>[] times)
+        public CustomTime(Time time, bool[] days, bool fixedTime)
         {
-            if (times.Length != 7)
+            if (days.Length != 7)
                 throw new Exception("Length of times must be 7!");
-            
-            this.times = times;
-        }
-        
-        /// <summary>
-        /// Gets the times for a given day
-        /// </summary>
-        /// <param name="day">0-7 = sunday-saturday</param>
-        /// <returns></returns>
-        public List<Time> getTimesForDay(int day)
-        {
-            return times[day];
-        }
 
-        public void addTimeToDay(int day, Time time)
-        {
-            times[day].Add(time);
+            this.days = days;
+            this.time = time;
+            this.FixedTime = fixedTime;
         }
     }
 }
