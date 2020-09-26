@@ -23,9 +23,9 @@ namespace ScheduleInator
             {
                 for (int j = i - 1; j > 0; j--)
                 {
-                    if (events[j - 1].StartTime.Hours > events[j].StartTime.Hours)
+                    if (events[j - 1].SpecifiedTime.StartTime.Hours > events[j].SpecifiedTime.StartTime.Hours)
                         SwapEvent = true;
-                    else if ((events[j - 1].StartTime.Hours == events[j].StartTime.Hours) && (events[j - 1].StartTime.Hours > events[j].StartTime.Hours))
+                    else if ((events[j - 1].SpecifiedTime.StartTime.Hours == events[j].SpecifiedTime.StartTime.Hours) && (events[j - 1].SpecifiedTime.StartTime.Minutes > events[j].SpecifiedTime.StartTime.Minutes))
                         SwapEvent = true;
 
                     if (SwapEvent)
