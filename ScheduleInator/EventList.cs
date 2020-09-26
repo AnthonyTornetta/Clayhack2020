@@ -126,7 +126,7 @@ namespace ScheduleInator
 
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].SpecifiedTime != null
+                if (events[i].SpecifiedTime != null)
                     predetermined.Add(events[i]);
                 else if (events[i].dueDate != null)
                     dueDated.Add(events[i]);
