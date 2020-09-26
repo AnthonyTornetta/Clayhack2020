@@ -29,7 +29,7 @@ namespace ScheduleInator
 
         public void addEvent(Event e)
         {
-            CustomTime start = e.StartTime;
+            CustomTime start = e.;
             CustomTime end = e.EndTime;
 
             DateTime today = DateTime.Today;

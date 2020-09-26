@@ -12,9 +12,11 @@ namespace ScheduleInator
     /// </summary>
     public class CustomTime
     {
-        Time time { get; set; }
-        bool[] days;
-        bool FixedTime { get; set; }
+        public Time StartTime { get; set; }
+        public Time EndTime { get; set; }
+
+        public bool[] days;
+        public bool FixedTime { get; set; }
 
         public bool this[int i]
         {
@@ -24,17 +26,19 @@ namespace ScheduleInator
 
         public CustomTime()
         {
-            time = new Time();
+            StartTime = new Time();
+            EndTime = new Time();
             days = new bool[7];
         }
 
-        public CustomTime(Time time, bool[] days, bool fixedTime)
+        public CustomTime(Time startTime, Time endTime, bool[] days, bool fixedTime)
         {
             if (days.Length != 7)
                 throw new Exception("Length of times must be 7!");
 
             this.days = days;
-            this.time = time;
+            this.StartTime = startTime;
+            this.EndTime = endTime;
             this.FixedTime = fixedTime;
         }
     }
