@@ -23,7 +23,7 @@ namespace ScheduleInator
             writer.Close();
         }
 
-        public List<Event> FileReader()
+        public List<Event> DeserializeEvents()
         {
             BinaryFormatter b = new BinaryFormatter();
             FileStream stream = new FileStream(@"D:\Hackathons\Clayhack\Clayhack2020\ScheduleInator\UserList.txt", FileMode.Open, FileAccess.Read);
