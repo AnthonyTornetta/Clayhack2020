@@ -1,31 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Serialization;
-
 
 namespace ScheduleInator
 {
     public class FileEditor
     {
-        string[] fileLines;
-        public FileEditor()
+        List<Event> EventList = new List<Event>();
+        public FileEditor(List<Event> EventList)
         {
-            fileLines = System.IO.File.ReadAllLines(@"D:\Hackathons\Clayhack\Clayhack2020\ScheduleInator\UserList.txt");
+            this.EventList = EventList;
         }
 
-        public List<Event> returnEvents()
-        { 
-            List<Event> EventList = new List<Event>()
+        public void SerializeEvents()
+        {
+            System.IO.StreamWriter writer = new System.IO.StreamWriter(@"D:\Hackathons\Clayhack\Clayhack2020\ScheduleInator\UserList.txt");
+            BinaryFormatter b = new BinaryFormatter();
+            b.Serialize(writer.BaseStream, EventList);
+            writer.Close();
+        }
 
+        public List<Event> FileReader()
+        {
+            BinaryFormatter b = new BinaryFormatter();
+            FileStream stream = new FileStream(@"D:\Hackathons\Clayhack\Clayhack2020\ScheduleInator\UserList.txt", FileMode.Open, FileAccess.Read);
+            List<Event> e = (List<Event>)b.Deserialize(stream);
 
-            foreach (var item in fileLines)
-            {
-                
-            }       
+            return e;
         }
     }
 }
+
+    
