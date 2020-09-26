@@ -16,35 +16,33 @@ namespace ScheduleInator
             events = ev;
         }
 
-        public void AddSpecializedEvent(Event e)
+        public void AddEvent(Event e)
         {
-            if (e.SpecifiedTime.FixedTime)
-            {
-                events.Add(e);
-            }
-            else if (e.dueDate != null)
-            {
-                events.Add(e);
-            }
+            events.Add(e);
         }
 
         public void SortPreDeterminedAndDueDated()
         {
             List<Event> preDetermined = new List<Event>();
             List<Event> dueDated = new List<Event>();
+            List<Event> autofilled = new List<Event>();
 
             for (int i = 0; i < events.Count; i++)
             {
                 if (events[i].SpecifiedTime.FixedTime)
                     preDetermined.Add(events[i]);
-                else
+                else if (events[i].dueDate != null)
                     dueDated.Add(events[i]);
+                else
+                    autofilled.Add(events[i]);
             }
 
             events.Clear();
             events.TrimExcess();
-            events.InsertRange(0, preDetermined);
-            events.InsertRange(events.Count, dueDated);
+            events.AddRange(preDetermined);
+            events.AddRange(dueDated);
+            events.AddRange(autofilled);
+
         }
 
         // Step 1:
