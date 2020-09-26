@@ -22,7 +22,7 @@ namespace ScheduleInator
             {
                 for (int j = i - 1; j > 0; j--)
                 {
-                    if (events[j - 1] > events[j])
+                    if (events[j - 1].StartTime > events[j].StartTime)
                     {
                         Event temp = events[j - 1];
                         events[j - 1] = events[j];
