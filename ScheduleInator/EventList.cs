@@ -21,7 +21,7 @@ namespace ScheduleInator
             events.Add(e);
         }
 
-        public void SortPreDeterminedAndDueDated()
+        public void PartitionEvents()
         {
             List<Event> preDetermined = new List<Event>();
             List<Event> dueDated = new List<Event>();
