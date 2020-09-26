@@ -57,8 +57,15 @@
     </ApplicationDefinition>
     <Compile Include="CustomTime.cs" />
     <Compile Include="EventList.cs" />
+    <Compile Include="EventWindow.xaml.cs">
+      <DependentUpon>EventWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FileEditor.cs" />
     <Compile Include="Time.cs" />
+    <Page Include="EventWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

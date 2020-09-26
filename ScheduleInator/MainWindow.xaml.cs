@@ -105,6 +105,8 @@ namespace ScheduleInator
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            EventWindow.PollUser();
+
             Event ev = new Event("test", "event", DateTime.Today, new CustomTime(
                 new Time(10, 10), new Time(22, 0), new bool[7], true));
 

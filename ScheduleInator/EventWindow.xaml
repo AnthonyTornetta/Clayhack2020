@@ -5,8 +5,134 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ScheduleInator"
         mc:Ignorable="d"
-        Title="EventWindow" Height="450" Width="800">
-    <Grid>
+        ResizeMode="NoResize"
+        Title="Event" Height="300" Width="700">
+    <Window.Resources>
+        <Style x:Key="btn-title" TargetType="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Width" Value="48" />
+            <Setter Property="Height" Value="36" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="btn-title-close" TargetType="Button" BasedOn="{StaticResource btn-title}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="Red" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="btn-slick" TargetType="Button">
+            <Setter Property="Foreground" Value="Gray" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="FontSize" Value="32" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#333" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Event" FontSize="20" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBlock>
+            <TextBox x:Name="tboxEventName" VerticalContentAlignment="Center" FontSize="20" Grid.Row="0" Grid.Column="1"></TextBox>
+
+            <Button Style="{StaticResource btn-slick}" x:Name="btnEnableDuedate" Content="Add Due Date" FontSize="20" Grid.Row="1" Grid.Column="1" Click="btnEnableDuedate_Click"></Button>
+            <TextBlock Text="Due Date" FontSize="20" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"></TextBlock>
+            <DatePicker x:Name="dueDate" Visibility="Hidden" FontSize="20" Grid.Row="1" VerticalContentAlignment="Center" Grid.Column="1"></DatePicker>
+
+            <TextBlock Text="Days" FontSize="20" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"></TextBlock>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <CheckBox Grid.Column="0" x:Name="chk1" Content="Monday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Column="1" x:Name="chk2" Content="Tuesday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Column="2" x:Name="chk3" Content="Wednesday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Column="3" x:Name="chk4" Content="Thursday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="0" x:Name="chk5" Content="Friday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="1" x:Name="chk6" Content="Saturday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+                <CheckBox Grid.Row="1" Grid.Column="2" x:Name="chk0" Content="Sunday" VerticalContentAlignment="Center"  VerticalAlignment="Center" FontSize="16"></CheckBox>
+            </Grid>
+
+            <TextBlock Text="ETA" FontSize="20" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"></TextBlock>
+            <Grid Grid.Row="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0" x:Name="grdETA">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="etaHours" PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="0"></TextBox>
+                    <TextBlock Margin="10 0" Text="Hours" FontSize="20" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                    <TextBox x:Name="etaMinutes" PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="2"></TextBox>
+                    <TextBlock Margin="10 0" Text="Minutes" FontSize="20" VerticalAlignment="Center" Grid.Column="3"></TextBlock>
+                </Grid>
+
+                <Grid Grid.Column="0" x:Name="grdTimes" Visibility="Hidden">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="0"></TextBox>
+                    <TextBlock x:Name="startTime" Margin="10 0" Text="Start Time" FontSize="20" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="2"></TextBox>
+                    <TextBlock x:Name="endTime" Margin="10 0" Text="End Time" FontSize="20" VerticalAlignment="Center" Grid.Column="3"></TextBlock>
+                </Grid>
+                
+                <Button Style="{StaticResource btn-slick}" x:Name="btnTimeToggle" Click="btnTimeToggle_Click" Grid.Column="1" FontSize="20" HorizontalAlignment="Right" Content="Specific Time"></Button>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1" Margin="0 10 0 0" Height="50">
+            <Button Style="{StaticResource btn-slick}" Content="Add Event" FontSize="20"></Button>
+        </Grid>
     </Grid>
 </Window>
