@@ -17,6 +17,40 @@ namespace ScheduleInator
             events = e;
         }
 
+        public void AddPreDetermined(Event e)
+        {
+            if (e.SpecifiedTime.FixedTime)
+            {
+                for (int i = 0; i < events.Count; i++)
+                {
+                    if (events[i].SpecifiedTime.EndTime.Hours > e.SpecifiedTime.StartTime.Hours)
+                    {
+                        //nope
+                    }
+                    else if ((events[i].SpecifiedTime.EndTime.Hours == e.SpecifiedTime.StartTime.Hours) && (events[i].SpecifiedTime.EndTime.Minutes > e.SpecifiedTime.StartTime.Minutes))
+                    {
+                        //nope
+                    }
+                    else if (events[i].SpecifiedTime.StartTime.Hours < e.SpecifiedTime.EndTime.Hours)
+                    {
+                        //nope
+                    }
+                    else if ((events[i].SpecifiedTime.StartTime.Hours == e.SpecifiedTime.EndTime.Hours) && (events[i].SpecifiedTime.StartTime.Minutes < e.SpecifiedTime.EndTime.Minutes))
+                    {
+                        //nope
+                    }
+                    else
+                    {
+                        events.Add(e);
+                    }
+                }
+            }
+            else
+            {
+                //nope
+            }
+        }
+
         public void OrderEvents()
         {
             bool SwapEvent = false;
@@ -40,16 +74,6 @@ namespace ScheduleInator
                     }
                 }
             }
-        }
-
-        public void addEvent(Event e)
-        {
-            events.Add(e);
-        }
-
-        public void removeEvent(Event e)
-        {
-            events.Remove(e);
         }
     }
 }
