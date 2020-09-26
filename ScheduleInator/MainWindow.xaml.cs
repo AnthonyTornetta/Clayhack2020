@@ -174,7 +174,7 @@ namespace ScheduleInator
         {
             EventWindow.PollUser();
 
-            Event ev = new Event("test", "event", DateTime.Today, new CustomTime(
+            Event ev = new Event("test", DateTime.Today, new CustomTime(
                 new Time(10, 10), new Time(22, 0), new bool[7], true));
 
             addEvent(ev);

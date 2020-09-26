@@ -50,7 +50,7 @@ namespace ScheduleInator
 
                 Time eta = new Time(Int32.Parse(etaHours), Int32.Parse(etaMin));
 
-                return new Event(name, (DateTime)date, new CustomTime(days, false, eta);
+                return new Event(name, (DateTime)date, new CustomTime(days, false, eta));
                 // hf dealing with those strings
             }
             else
