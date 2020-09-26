@@ -112,19 +112,19 @@ namespace ScheduleInator
             if (time.Contains("am") || time.Contains("AM") || time.Contains("Am"))
             {
                 string[] hourMinute = time.Split(':');
-                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1].Substring(0,2)));
                 return eta;
             }
             else if (time.Contains("pm") || time.Contains("PM") || time.Contains("Pm"))
             {
                 string[] hourMinute = time.Split(':');
-                Time eta = new Time(12 + Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                Time eta = new Time(12 + Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1].Substring(0,2)));
                 return eta;
             }
             else
             {
                 string[] hourMinute = time.Split(':');
-                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1].Substring(0,2)));
                 return eta;
             }
         }
