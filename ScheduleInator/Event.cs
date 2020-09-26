@@ -15,7 +15,7 @@ namespace ScheduleInator
         public CustomTime specifiedTime;
         public CustomTime dueDate;
 
-        public Event(CustomTime startTime, CustomTime endTime, string name, string type, CustomTime dueDate, CustomTime specifiedTime )
+        public Event(Time startTime, Time endTime, string name, string type, CustomTime dueDate, CustomTime specifiedTime )
         {
             this.StartTime = startTime;
             this.EndTime = endTime;
