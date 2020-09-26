@@ -21,6 +21,11 @@ namespace ScheduleInator
             events.Add(e);
         }
 
+        public void RemoveEvent(Event e)
+        {
+            events.Remove(e);
+        }
+
         public void PartitionEvents()
         {
             List<Event> preDetermined = new List<Event>();
