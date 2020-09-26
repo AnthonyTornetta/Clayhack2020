@@ -18,6 +18,14 @@ namespace ScheduleInator
             times = new List<Time>[7];
         }
 
+        public CustomTime(List<Time>[] times)
+        {
+            if (times.Length != 7)
+                throw new Exception("Length of times must be 7!");
+            
+            this.times = times;
+        }
+
         /// <summary>
         /// Gets the times for a given day
         /// </summary>

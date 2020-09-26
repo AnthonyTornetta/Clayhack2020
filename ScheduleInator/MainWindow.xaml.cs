@@ -22,7 +22,6 @@ namespace ScheduleInator
     {
         public MainWindow()
         {
-
             InitializeComponent();
 
 
@@ -31,6 +30,12 @@ namespace ScheduleInator
         public void addEvent(Event e)
         {
             CustomTime start = e.StartTime;
+            CustomTime end = e.EndTime;
+
+            DateTime today = DateTime.Today;
+            int wkday = today.DayOfWeek - DayOfWeek.Sunday;
+
+            start.getTimesForDay(wkday);
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
