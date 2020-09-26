@@ -23,7 +23,7 @@ namespace ScheduleInator
             {
                 for (int j = i - 1; j > 0; j--)
                 {
-                    if (!(events[j - 1].SpecifiedTime.StartTime.isAm() == events[j].SpecifiedTime.StartTime.isPm())
+                    if (!(events[j - 1].SpecifiedTime.StartTime.isAm() == events[j].SpecifiedTime.StartTime.isPm()))
                     {
                         if (events[j - 1].SpecifiedTime.StartTime.Hours > events[j].SpecifiedTime.StartTime.Hours)
                             SwapEvent = true;
