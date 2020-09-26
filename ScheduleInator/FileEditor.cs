@@ -19,7 +19,13 @@ namespace ScheduleInator
 
         public List<Event> returnEvents()
         { 
+            List<Event> EventList = new List<Event>()
 
+
+            foreach (var item in fileLines)
+            {
+                
+            }       
         }
     }
 }

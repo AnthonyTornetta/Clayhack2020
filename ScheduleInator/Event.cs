@@ -12,8 +12,8 @@ namespace ScheduleInator
         public Time EndTime { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
-        private CustomTime specifiedTime;
-        private CustomTime dueDate;
+        public CustomTime specifiedTime;
+        public CustomTime dueDate;
 
         public Event(CustomTime startTime, CustomTime endTime, string name, string type, CustomTime dueDate, CustomTime specifiedTime )
         {

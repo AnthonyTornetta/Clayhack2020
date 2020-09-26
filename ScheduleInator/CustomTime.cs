@@ -26,7 +26,7 @@ namespace ScheduleInator
             
             this.times = times;
         }
-
+        
         /// <summary>
         /// Gets the times for a given day
         /// </summary>
