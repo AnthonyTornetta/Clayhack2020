@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 
 namespace ScheduleInator
 {
+    [Serializable]
     public class Event
     {
         public string Name { get; set; }
+
         public string Type { get; set; }
+
         public CustomTime SpecifiedTime { get; set; }
-        public DateTime dueDate;
+
+        public DateTime? dueDate;
 
         public int ETA { get; set; }
 
-        public Event(string name, DateTime dueDate, CustomTime specifiedTime )
+        public Event(string name, DateTime? dueDate, CustomTime specifiedTime )
         {
             this.SpecifiedTime = specifiedTime;
             this.Name = name;

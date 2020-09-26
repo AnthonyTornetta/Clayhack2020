@@ -10,6 +10,7 @@ namespace ScheduleInator
     /// <summary>
     /// Represents a collection of times that can occur during a week
     /// </summary>
+    [Serializable]
     public class CustomTime
     {
         public Time StartTime { get; set; }

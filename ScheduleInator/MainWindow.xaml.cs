@@ -22,6 +22,8 @@ namespace ScheduleInator
     {
         private Rectangle[,] rects;
 
+        EventList elist;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,10 +77,68 @@ namespace ScheduleInator
                 }
             }
             */
+
+            FileEditor fe = new FileEditor(null);
+
+            elist = new EventList(fe.DeserializeEvents());
         }
 
-        public void addEvent(Event e)
+        public void resetEverything()
         {
+            for (int col = 0; col < 7; col++)
+            {
+                for (int row = 0; row < 24 * 2; row++)
+                {
+                    rects[col, row].Fill = new SolidColorBrush();
+                }
+            }
+
+            for (int i = 0; i < grdCalendar.Children.Count; i++)
+            {
+                if (grdCalendar.Children[i] is TextBlock)
+                {
+                    grdCalendar.Children.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            Time t = new Time();
+
+            for (int i = 0; i < 24 * 2; i++)
+            {
+                TextBlock txt = new TextBlock
+                {
+                    Text = t.ToString(),
+                    FontSize = 16
+                };
+                txt.SetValue(Grid.RowProperty, i);
+                grdCalendar.Children.Add(txt);
+
+                t.addMins(30);
+            }
+
+            while(gridEvents.Children.Count != 1)
+            {
+                gridEvents.Children.RemoveAt(0);
+            }
+
+            foreach (var item in elist.events)
+            {
+                addEvent(item, false);
+            }
+        }
+
+        public void addEvent(Event e, bool brandNew)
+        {
+            elist.AddEvent(e);
+
+            if (brandNew)
+            {
+                elist.PartitionEvents();
+                resetEverything();
+                return;
+            }
+
             RowDefinition rowObj = new RowDefinition
             {
                 Height = GridLength.Auto
@@ -123,6 +183,7 @@ namespace ScheduleInator
                 Style = this.FindResource("btn-slick") as Style,
                 Content = "-"
             };
+            btnRemove.Name = "removeBtn-" + e.Name;
             btnRemove.SetValue(Grid.RowProperty, row);
             btnRemove.SetValue(Grid.ColumnProperty, 3);
             btnRemove.Click += btnRemove_Click;
@@ -172,47 +233,28 @@ namespace ScheduleInator
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            EventWindow.PollUser();
+            Event ev = EventWindow.PollUser();
 
-            Event ev = new Event("test", DateTime.Today, new CustomTime(
-                new Time(10, 10), new Time(22, 0), new bool[7], true));
-
-            addEvent(ev);
+            if (ev != null)
+            {
+                addEvent(ev, true);
+            }
         }
 
         private void btnRemove_Click(object sender, RoutedEventArgs e)
         {
-            for (int col = 0; col < 7; col++)
+            string name = ((Button)(e.Source)).Name.Split('-')[1];
+            for (int i = 0; i < elist.events.Count; i++)
             {
-                for (int row = 0; row < 24 * 2; row++)
+                if (elist.events[i].Name.Equals(name))
                 {
-                    rects[col, row].Fill = new SolidColorBrush();
+                    elist.RemoveEvent(elist.events[i]);
                 }
             }
 
-            for(int i = 0; i < grdCalendar.Children.Count; i++)
-            {
-                if(grdCalendar.Children[i] is TextBlock)
-                {
-                    grdCalendar.Children.RemoveAt(i);
-                    i--;
-                }
-            }
+            elist.PartitionEvents();
 
-            Time t = new Time();
-
-            for (int i = 0; i < 24 * 2; i++)
-            {
-                TextBlock txt = new TextBlock
-                {
-                    Text = t.ToString(),
-                    FontSize = 16
-                };
-                txt.SetValue(Grid.RowProperty, i);
-                grdCalendar.Children.Add(txt);
-
-                t.addMins(30);
-            }
+            resetEverything();
         }
 
         private void gridTitle_MouseDown(object sender, MouseButtonEventArgs e)
@@ -253,6 +295,13 @@ namespace ScheduleInator
                 viewOne.Visibility = Visibility.Visible;
                 viewTwo.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void save(object sender, RoutedEventArgs e)
+        {
+            FileEditor fe = new FileEditor(new List<Event>());
+
+            fe.SerializeEvents();
         }
     }
 }

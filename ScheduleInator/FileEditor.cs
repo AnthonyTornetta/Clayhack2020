@@ -9,27 +9,35 @@ namespace ScheduleInator
 {
     public class FileEditor
     {
-        List<Event> EventList = new List<Event>();
-        public FileEditor(List<Event> EventList)
+        List<Event> eventList = new List<Event>();
+
+        public FileEditor(List<Event> eventList)
         {
-            this.EventList = EventList;
+            this.eventList = eventList;
         }
 
         public void SerializeEvents()
         {
             System.IO.StreamWriter writer = new StreamWriter(@"UserList.bin");
             BinaryFormatter b = new BinaryFormatter();
-            b.Serialize(writer.BaseStream, EventList);
+            b.Serialize(writer.BaseStream, eventList);
             writer.Close();
         }
 
         public List<Event> DeserializeEvents()
         {
-            BinaryFormatter b = new BinaryFormatter();
-            FileStream stream = new FileStream(@"UserList.bin", FileMode.Open, FileAccess.Read);
-            List<Event> e = (List<Event>)b.Deserialize(stream);
+            try
+            {
+                BinaryFormatter b = new BinaryFormatter();
+                FileStream stream = new FileStream(@"UserList.bin", FileMode.Open, FileAccess.Read);
+                List<Event> e = (List<Event>)b.Deserialize(stream);
 
-            return e;
+                return e;
+            }
+            catch(Exception)
+            {
+                return new List<Event>();
+            }
         }
     }
 }

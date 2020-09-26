@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleInator
 {
+    [Serializable]
     public class Time
     {
         public int Hours { get; set; }

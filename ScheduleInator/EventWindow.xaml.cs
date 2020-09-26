@@ -62,6 +62,9 @@ namespace ScheduleInator
                 string startTime = window.startTime.Text;
                 string endTime = window.endTime.Text;
 
+                if (startTime.Equals("") || endTime.Equals("") || name.Equals(""))
+                    return null;
+
                 Time start = ParseTimes(startTime);
                 Time end = ParseTimes(endTime);
 
@@ -124,6 +127,7 @@ namespace ScheduleInator
             else
             {
                 string[] hourMinute = time.Split(':');
+                MessageBox.Show(time);
                 Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1].Substring(0,2)));
                 return eta;
             }
