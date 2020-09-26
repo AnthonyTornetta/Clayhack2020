@@ -15,7 +15,7 @@ namespace ScheduleInator
         private CustomTime specifiedTime;
         private CustomTime dueDate;
 
-        public Event(int startTime, int endTime, string name, string type, int dueDate, CustomTime specifiedTime,CustomTime dueDate )
+        public Event(int startTime, int endTime, string name, string type, CustomTime dueDate, CustomTime specifiedTime )
         {
             this.startTime = startTime;
             this.endTime = endTime;
@@ -24,7 +24,7 @@ namespace ScheduleInator
             this.dueDate = dueDate;
         }
 
-        public ModifyTime(int day, Time time)
+        public void ModifyTime(int day, Time time)
         {
             this.specifiedTime.addTimeToDay(day, time)
         }

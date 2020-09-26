@@ -30,7 +30,7 @@ namespace ScheduleInator
 
         public void addEvent(Event e)
         {
-
+            
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)

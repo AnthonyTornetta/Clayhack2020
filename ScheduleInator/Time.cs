@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScheduleInator
 {
-    class Time
+    public class Time
     {
         private int hour, min;
 
