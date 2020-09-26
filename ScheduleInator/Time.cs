@@ -8,50 +8,32 @@ namespace ScheduleInator
 {
     public class Time
     {
-        private int hour, min;
+        public int Hours { get; set; }
+
+        public int Minutes { get; set; }
 
         public void addHours(int amt)
         {
-            hour += amt;
-            hour %= amt;
+            Hours += amt;
+            Hours %= amt;
         }
 
         public void addMins(int amt)
         {
-            min += amt;
-            int temp = min % 60;
-            hour += (min - temp) / 60;
-            min = temp;
+            Minutes += amt;
+            int temp = Minutes % 60;
+            Hours += (Minutes - temp) / 60;
+            Minutes = temp;
         }
 
         public bool isAm()
         {
-            return hour < 12;
+            return Hours < 12;
         }
 
         public bool isPm()
         {
             return !isAm();
-        }
-
-        public int getHours()
-        {
-            return hour;
-        }
-
-        public int getMinutes()
-        {
-            return min;
-        }
-
-        public void setHours(int hours)
-        {
-            this.hour = hours;
-        }
-
-        public void setMinutes(int m)
-        {
-            this.min = m;
         }
     }
 }

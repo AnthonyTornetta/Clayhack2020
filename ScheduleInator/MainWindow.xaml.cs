@@ -35,7 +35,12 @@ namespace ScheduleInator
             DateTime today = DateTime.Today;
             int wkday = today.DayOfWeek - DayOfWeek.Sunday;
 
-            start.getTimesForDay(wkday);
+            List<Time> times = start.getTimesForDay(wkday);
+
+            for(int i = 0; i < times.Count; i++)
+            {
+                if (today.Hour < times[i].Hours; )
+            }
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
