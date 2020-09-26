@@ -11,52 +11,53 @@ namespace ScheduleInator
     {
         public List<Event> events;
 
-        public EventList(List<Event> e)
+        public EventList(List<Event> ev)
         {
-            events = e;
+            events = ev;
         }
 
-        public void OrderEvents()
-        {
-            // Step 1:
-            // Put in pre-determined times by user
-            // Step 2:
-            // Sort non predetermined events by their due date
-            // Put them in based off where they fit in order of their due date
-            // Step 3:
-            // Autofill the rest
-
-            bool SwapEvent = false;
-            for (int i = 0; i < events.Count; i++)
-            {
-                for (int j = i - 1; j > 0; j--)
-                {
-                    if (!(events[j - 1].SpecifiedTime.StartTime.isAm() == events[j].SpecifiedTime.StartTime.isPm()))
-                    {
-                        if (events[j - 1].SpecifiedTime.StartTime.Hours > events[j].SpecifiedTime.StartTime.Hours)
-                            SwapEvent = true;
-                        else if ((events[j - 1].SpecifiedTime.StartTime.Hours == events[j].SpecifiedTime.StartTime.Hours) && (events[j - 1].SpecifiedTime.StartTime.Minutes > events[j].SpecifiedTime.StartTime.Minutes))
-                            SwapEvent = true;
-                    }
-
-                    if (SwapEvent)
-                    {
-                        Event temp = events[j - 1];
-                        events[j - 1] = events[j];
-                        events[j] = temp;
-                    }
-                }
-            }
-        }
-
-        public void addEvent(Event e)
+        public void AddEvent(Event e)
         {
             events.Add(e);
         }
 
-        public void removeEvent(Event e)
+        public void RemoveEvent(Event e)
         {
             events.Remove(e);
         }
+
+        public void PartitionEvents()
+        {
+            List<Event> preDetermined = new List<Event>();
+            List<Event> dueDated = new List<Event>();
+            List<Event> autofilled = new List<Event>();
+
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i].SpecifiedTime.FixedTime)
+                    preDetermined.Add(events[i]);
+                else if (events[i].dueDate != null)
+                    dueDated.Add(events[i]);
+                else
+                    autofilled.Add(events[i]);
+            }
+
+            events.Clear();
+            events.TrimExcess();
+            events.AddRange(preDetermined);
+            events.AddRange(dueDated);
+            events.AddRange(autofilled);
+
+        }
+
+        // Step 1:
+        // Put in pre-determined times by user
+        // Step 2:
+        // Sort non predetermined events by their due date
+        // Put them in based off where they fit in order of their due date
+        // Step 3:
+        // Autofill the rest
+
+            
     }
 }
