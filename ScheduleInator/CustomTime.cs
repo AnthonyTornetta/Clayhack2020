@@ -44,14 +44,14 @@ namespace ScheduleInator
             this.FixedTime = fixedTime;
         }
 
-        public CustomTime(Time startTime, Time endTime, bool[] days, bool fixedTime, Time eta)
+        public CustomTime(bool[] days, bool fixedTime, Time eta)
         {
             if (days.Length != 7)
                 throw new Exception("Length of times must be 7!");
 
             this.days = days;
-            this.StartTime = startTime;
-            this.EndTime = endTime;
+            this.StartTime = null;
+            this.EndTime = null;
             this.FixedTime = fixedTime;
             this.eta = eta;
         }

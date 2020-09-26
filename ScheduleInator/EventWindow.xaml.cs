@@ -50,6 +50,7 @@ namespace ScheduleInator
 
                 Time eta = new Time(Int32.Parse(etaHours), Int32.Parse(etaMin));
 
+                return new Event(name, (DateTime)date, new CustomTime(days, false, eta);
                 // hf dealing with those strings
             }
             else
@@ -58,6 +59,10 @@ namespace ScheduleInator
                 string startTime = window.startTime.Text;
                 string endTime = window.endTime.Text;
 
+                Time start = ParseTimes(startTime);
+                Time end = ParseTimes(endTime);
+
+                return new Event(name, (DateTime)date, new CustomTime(start, end, days, true));
                 // hf 2.0
             }
 
@@ -93,6 +98,29 @@ namespace ScheduleInator
                 btnTimeToggle.Content = "Specific Time";
                 grdETA.Visibility = Visibility.Visible;
                 grdTimes.Visibility = Visibility.Hidden;
+            }
+        }
+
+        public static Time ParseTimes(string time)
+        {
+
+            if (time.Contains("am") || time.Contains("AM") || time.Contains("Am"))
+            {
+                string[] hourMinute = time.Split(':');
+                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                return eta;
+            }
+            else if (time.Contains("pm") || time.Contains("PM") || time.Contains("Pm"))
+            {
+                string[] hourMinute = time.Split(':');
+                Time eta = new Time(12 + Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                return eta;
+            }
+            else
+            {
+                string[] hourMinute = time.Split(':');
+                Time eta = new Time(Int32.Parse(hourMinute[0]), Int32.Parse(hourMinute[1]));
+                return eta;
             }
         }
     }
