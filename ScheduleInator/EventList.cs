@@ -25,7 +25,7 @@ namespace ScheduleInator
             for (int i = 0; i < events.Count; i++)
             {
                 if (events[i].SpecifiedTime != null)
-                    AddPreDeterminedEvent(e);
+                    AddPreDeterminedEvent(e, i);
                 else if (e.dueDate != null)
                     AddDueDated(e);
                 else if (e.SpecifiedTime.StartTime == null && e.SpecifiedTime.EndTime == null)
@@ -35,16 +35,16 @@ namespace ScheduleInator
             }
         }
 
-        public void AddPreDeterminedEvent(Event e)
+        public void AddPreDeterminedEvent(Event e, int i)
         {
             if (events[i].SpecifiedTime.StartTime.Hours < e.SpecifiedTime.EndTime.Hours)
-                break;
+                return;
             else if ((events[i].SpecifiedTime.StartTime.Hours == e.SpecifiedTime.EndTime.Hours) && (events[i].SpecifiedTime.StartTime.Minutes < e.SpecifiedTime.EndTime.Minutes))
-                break;
+                return;
             else if (events[i].SpecifiedTime.EndTime.Hours > e.SpecifiedTime.StartTime.Hours)
-                break;
+                return;
             else if ((events[i].SpecifiedTime.EndTime.Hours == e.SpecifiedTime.StartTime.Hours) && (events[i].SpecifiedTime.EndTime.Minutes > e.SpecifiedTime.StartTime.Minutes))
-                break;
+                return;
             else
                 events.Add(e);
         }
@@ -126,7 +126,7 @@ namespace ScheduleInator
 
             for (int i = 0; i < events.Count; i++)
             {
-                if (events[i].SpecifiedTime != null
+                if (events[i].SpecifiedTime != null)
                     predetermined.Add(events[i]);
                 else if (events[i].dueDate != null)
                     dueDated.Add(events[i]);
