@@ -60,6 +60,7 @@
 
         <Grid Background="#333" Grid.Row="1" Grid.Column="0">
             <Button x:Name="btnSwap" Content="Swap Views" FontSize="20" VerticalAlignment="Top" Click="btnSwap_Click" Style="{StaticResource btn-slick}"/>
+            <Button x:Name="btnSave" Content="Save" FontSize="20" VerticalAlignment="Bottom" Click="save" Style="{StaticResource btn-slick}"/>
         </Grid>
         <Grid Background="#F76902" Grid.Row="0" Grid.Column="0">
 

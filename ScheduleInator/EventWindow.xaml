@@ -121,10 +121,10 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="0"></TextBox>
-                    <TextBlock x:Name="startTime" Margin="10 0" Text="Start Time" FontSize="20" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
-                    <TextBox PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="2"></TextBox>
-                    <TextBlock x:Name="endTime" Margin="10 0" Text="End Time" FontSize="20" VerticalAlignment="Center" Grid.Column="3"></TextBlock>
+                    <TextBox x:Name="startTime" PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="0"></TextBox>
+                    <TextBlock Margin="10 0" Text="Start Time" FontSize="20" VerticalAlignment="Center" Grid.Column="1"></TextBlock>
+                    <TextBox x:Name="endTime" PreviewTextInput="TextBox_PreviewTextInput" FontSize="20" Width="100" VerticalContentAlignment="Center" Grid.Column="2"></TextBox>
+                    <TextBlock Margin="10 0" Text="End Time" FontSize="20" VerticalAlignment="Center" Grid.Column="3"></TextBlock>
                 </Grid>
                 
                 <Button Style="{StaticResource btn-slick}" x:Name="btnTimeToggle" Click="btnTimeToggle_Click" Grid.Column="1" FontSize="20" HorizontalAlignment="Right" Content="Specific Time"></Button>
