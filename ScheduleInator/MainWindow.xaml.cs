@@ -130,11 +130,11 @@ namespace ScheduleInator
 
         public void addEvent(Event e, bool brandNew)
         {
-            elist.AddEvent(e);
-
             if (brandNew)
             {
-                elist.PartitionEvents();
+                elist.events.Add(e);
+
+                elist.doit();
                 resetEverything();
                 return;
             }
@@ -248,11 +248,11 @@ namespace ScheduleInator
             {
                 if (elist.events[i].Name.Equals(name))
                 {
-                    elist.RemoveEvent(elist.events[i]);
+                    elist.events.RemoveAt(i);
                 }
             }
 
-            elist.PartitionEvents();
+            elist.doit();
 
             resetEverything();
         }

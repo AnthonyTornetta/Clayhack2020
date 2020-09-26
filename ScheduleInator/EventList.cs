@@ -19,6 +19,51 @@ namespace ScheduleInator
             events = ev;
         }
 
+        public void doit()
+        {
+            for(int i = 0; i < events.Count; i++)
+            {
+                bool set = false;
+
+                for(int j = 0; j < events.Count - 1; j++)
+                {
+                    if (events[i].SpecifiedTime.FixedTime)
+                    {
+                        set = true;
+                        break;
+                    }
+                    else
+                    {
+                        if (events[j].SpecifiedTime == null)
+                            continue;
+
+                        Time end = events[j].SpecifiedTime.EndTime;
+                        Time start = events[j + 1].SpecifiedTime.StartTime;
+
+                        var t = events[i].SpecifiedTime;
+                        int c = t.EndTime.Hours * 60 + t.EndTime.Minutes - t.StartTime.Hours * 60 - t.StartTime.Minutes;
+
+                        int collective = start.Hours * 60 + start.Minutes - end.Hours * 60 - end.Minutes;
+                        if (collective >= c)
+                        {
+                            events[i].SpecifiedTime.StartTime = new Time(end.Hours, end.Minutes);
+                            events[i].SpecifiedTime.EndTime = new Time(end.Hours, end.Minutes);
+                            events[i].SpecifiedTime.EndTime.addMins(c);
+                        }
+                        set = true;
+
+                        break;
+                    }
+                }
+
+                if(!set)
+                {
+                    events.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
         public void AddPreDeterminedEvent(Event e)
         {
             for (int i = 0; i < events.Count; i++)

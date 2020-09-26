@@ -53,7 +53,7 @@ namespace ScheduleInator
 
                 Time eta = new Time(Int32.Parse(etaHours), Int32.Parse(etaMin));
 
-                return new Event(name, (DateTime)date, new CustomTime(days, false, eta));
+                return new Event(name, date, new CustomTime(days, false, eta));
                 // hf dealing with those strings
             }
             else
@@ -68,7 +68,7 @@ namespace ScheduleInator
                 Time start = ParseTimes(startTime);
                 Time end = ParseTimes(endTime);
 
-                return new Event(name, (DateTime)date, new CustomTime(start, end, days, true));
+                return new Event(name, date, new CustomTime(start, end, days, true));
                 // hf 2.0
             }
 
