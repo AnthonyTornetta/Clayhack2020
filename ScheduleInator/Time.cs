@@ -63,11 +63,6 @@ namespace ScheduleInator
             if (hr == 0)
                 hr = 12;
 
-            if (isPm() && hr != 0)
-            {
-                hr++;
-            }
-
             string hrS = hr + "";
             string minS = Minutes < 10 ? "0" + Minutes : Minutes + "";
 

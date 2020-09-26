@@ -66,7 +66,7 @@ namespace ScheduleInator
                 // hf 2.0
             }
 
-
+            return null;
         }
 
         private void ok_Click(object sender, RoutedEventArgs e)
@@ -92,12 +92,14 @@ namespace ScheduleInator
                 btnTimeToggle.Content = "Set ETA";
                 grdETA.Visibility = Visibility.Hidden;
                 grdTimes.Visibility = Visibility.Visible;
+                etaOrTimes.Text = "Times";
             }
             else
             {
                 btnTimeToggle.Content = "Specific Time";
                 grdETA.Visibility = Visibility.Visible;
                 grdTimes.Visibility = Visibility.Hidden;
+                etaOrTimes.Text = "ETA";
             }
         }
 

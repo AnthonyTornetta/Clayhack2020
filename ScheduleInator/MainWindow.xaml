@@ -59,7 +59,7 @@
         </Grid.ColumnDefinitions>
 
         <Grid Background="#333" Grid.Row="1" Grid.Column="0">
-
+            <Button x:Name="btnSwap" Content="Swap Views" FontSize="20" VerticalAlignment="Top" Click="btnSwap_Click" Style="{StaticResource btn-slick}"/>
         </Grid>
         <Grid Background="#F76902" Grid.Row="0" Grid.Column="0">
 
@@ -87,8 +87,8 @@
                 <Button x:Name="btnClose" Click="btnClose_Click" VerticalAlignment="Top" Grid.Column="2" Content="X" Style="{StaticResource btn-title-close}" />
             </Grid>
         </Grid>
-
-        <ScrollViewer Grid.Row="1" Grid.Column="1" Margin="10" x:Name="scrollEvents" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
+        
+        <ScrollViewer Visibility="Hidden" x:Name="viewOne" Grid.Row="1" Grid.Column="1" Margin="10" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" >
             <Grid x:Name="gridEvents">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -104,6 +104,70 @@
                 <Button Style="{StaticResource btn-slick}" x:Name="btnAdd" Content="+" Click="btnAdd_Click" Grid.Row="1" Grid.Column="0"></Button>
             </Grid>
         </ScrollViewer>
-        
+
+        <ScrollViewer x:Name="viewTwo" Margin="10" Grid.Row="1" Grid.Column="1">
+            <Grid x:Name="grdCalendar" ShowGridLines="True" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>

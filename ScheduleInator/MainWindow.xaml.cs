@@ -20,11 +20,61 @@ namespace ScheduleInator
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Rectangle[,] rects;
+
         public MainWindow()
         {
             InitializeComponent();
 
+            Time t = new Time();
 
+            for(int i = 0; i < 24 * 2; i++)
+            {
+                TextBlock txt = new TextBlock
+                {
+                    Text = t.ToString(),
+                    FontSize = 16
+                };
+                txt.SetValue(Grid.RowProperty, i);
+                grdCalendar.Children.Add(txt);
+
+                t.addMins(30);
+            }
+
+            rects = new Rectangle[7, 24 * 2];
+
+            for(int col = 0; col < 7; col++)
+            {
+                for(int row = 0; row < 24 * 2; row++)
+                {
+                    rects[col, row] = new Rectangle();
+
+                    rects[col, row].SetValue(Grid.RowProperty, row);
+                    rects[col, row].SetValue(Grid.ColumnProperty, col + 1);
+
+                    grdCalendar.Children.Add(rects[col, row]);
+                }
+            }
+
+            /*
+            Random rdm = new Random();
+
+            for (int i = 0; i < 24 * 4; i++)
+            {
+                RowDefinition def = new RowDefinition();
+                def.Height = new GridLength(20);
+                viewTwo.RowDefinitions.Add(def);
+
+                for (int j = 0; j < 7; j++)
+                {
+                    Grid grd = new Grid();
+                    grd.Background = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+                    grd.SetValue(Grid.ColumnProperty, j);
+                    grd.SetValue(Grid.RowProperty, i);
+                    viewTwo.Children.Add(grd);
+                }
+            }
+            */
         }
 
         public void addEvent(Event e)
@@ -35,15 +85,6 @@ namespace ScheduleInator
             };
 
             gridEvents.RowDefinitions.Add(rowObj);
-
-
-            /*
-<TextBlock Text="Cool Event Name" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"></TextBlock>
-<TextBlock Text="12:00 AM" FontSize="25" VerticalAlignment="Center" Grid.Row="0" Grid.Column="1"></TextBlock>
-<Button Style="{StaticResource btn-slick}" x:Name="btnModify" Content="*" Click="btnModify_Click" Grid.Row="0" Grid.Column="2"></Button>
-<Button Style="{StaticResource btn-slick}" x:Name="btnAdd" Content="+" Click="btnAdd_Click" Grid.Row="0" Grid.Column="3"></Button>
-<Button Style="{StaticResource btn-slick}" x:Name="btnRemove" Content="-" Click="btnRemove_Click" Grid.Row="0" Grid.Column="4"></Button>
-             */
 
             UIElement lastElem = gridEvents.Children[gridEvents.Children.Count - 1];
             int row = (int)lastElem.GetValue(Grid.RowProperty);
@@ -96,6 +137,32 @@ namespace ScheduleInator
             gridEvents.Children.Add(lastElem);
 
             lastElem.SetValue(Grid.RowProperty, row + 1);
+
+
+            int pos = time.StartTime.Hours * 2 + time.StartTime.Minutes / 30;
+
+            for(int i = 0; i < 7; i++)
+            {
+                if(time.days[i] || true)
+                {
+                    TextBlock txtBlk = new TextBlock()
+                    {
+                        Text = e.Name
+                    };
+                    txtBlk.SetValue(Grid.RowProperty, pos);
+                    txtBlk.SetValue(Grid.ColumnProperty, i + 1);
+                    txtBlk.VerticalAlignment = VerticalAlignment.Center;
+                    txtBlk.HorizontalAlignment = HorizontalAlignment.Center;
+
+                    grdCalendar.Children.Add(txtBlk);
+
+                    for(int j = pos; j <= time.EndTime.Hours * 2 + time.EndTime.Minutes / 30; j++)
+                    {
+                        rects[i, j].Fill = new SolidColorBrush(Color.FromRgb(28, 255, 28));
+                    }
+                }
+            }
+
         }
 
         private void btnModify_Click(object sender, RoutedEventArgs e)
@@ -142,6 +209,20 @@ namespace ScheduleInator
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void btnSwap_Click(object sender, RoutedEventArgs e)
+        {
+            if (viewOne.Visibility == Visibility.Visible)
+            {
+                viewOne.Visibility = Visibility.Hidden;
+                viewTwo.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                viewOne.Visibility = Visibility.Visible;
+                viewTwo.Visibility = Visibility.Hidden;
+            }
         }
     }
 }
