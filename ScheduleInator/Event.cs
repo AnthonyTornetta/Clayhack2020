@@ -8,8 +8,8 @@ namespace ScheduleInator
 {
     public class Event
     {
-        public CustomTime StartTime { get; set; }
-        public CustomTime EndTime { get; set; }
+        public Time StartTime { get; set; }
+        public Time EndTime { get; set; }
         public string Name { get; set; }
         public string Type { get; set; }
         private CustomTime specifiedTime;
