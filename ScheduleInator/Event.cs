@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CustomTime;
 
 namespace ScheduleInator
 {
-    class Event
+    public class Event
     {
         private int startTime { get; set; }
         private int endTime { get; set; }
         private string name { get; set; }
         private string type { get; set; }
-        private int dueDate { get; set; }
+        private CustomTime specifiedTime;
+        private CustomTime dueDate;
 
         public Event(int startTime, int endTime, string name, string type, int dueDate, CustomTime specifiedTime,CustomTime dueDate )
         {
