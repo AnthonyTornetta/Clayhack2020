@@ -10,9 +10,9 @@ namespace ScheduleInator
     {
         public List<Event> events;
 
-        public EventList(List<Event> e)
+        public EventList(List<Event> ev)
         {
-            events = e;
+            events = ev;
         }
 
         public void AddPreDetermined(Event e)
