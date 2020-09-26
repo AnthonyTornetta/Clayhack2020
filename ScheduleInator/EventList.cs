@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -39,6 +40,16 @@ namespace ScheduleInator
                     }
                 }
             }
+        }
+
+        public void addEvent(Event e)
+        {
+            events.Add(e);
+        }
+
+        public void removeEvent(Event e)
+        {
+            events.Remove(e);
         }
     }
 }
