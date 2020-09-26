@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -49,15 +50,5 @@ namespace ScheduleInator
             events.AddRange(autofilled);
 
         }
-
-        // Step 1:
-        // Put in pre-determined times by user
-        // Step 2:
-        // Sort non predetermined events by their due date
-        // Put them in based off where they fit in order of their due date
-        // Step 3:
-        // Autofill the rest
-
-            
     }
 }

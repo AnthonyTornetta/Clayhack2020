@@ -15,11 +15,10 @@ namespace ScheduleInator
 
         public int ETA { get; set; }
 
-        public Event(string name, string type, DateTime dueDate, CustomTime specifiedTime )
+        public Event(string name, DateTime dueDate, CustomTime specifiedTime )
         {
             this.SpecifiedTime = specifiedTime;
             this.Name = name;
-            this.Type = type;
             this.dueDate = dueDate;
         }
 

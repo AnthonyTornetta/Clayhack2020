@@ -34,13 +34,21 @@ namespace ScheduleInator
 
             bool[] days = new bool[7];
             days[0] = (bool)window.chk0.IsChecked;
-                // 6 more times
+            days[1] = (bool)window.chk1.IsChecked;
+            days[2] = (bool)window.chk2.IsChecked;
+            days[3] = (bool)window.chk3.IsChecked;
+            days[4] = (bool)window.chk4.IsChecked;
+            days[5] = (bool)window.chk5.IsChecked;
+            days[6] = (bool)window.chk6.IsChecked;
 
-            if(window.grdETA.Visibility == Visibility.Visible)
+
+            if (window.grdETA.Visibility == Visibility.Visible)
             {
                 // It's the ETA they want
                 string etaMin = window.etaMinutes.Text;
                 string etaHours = window.etaHours.Text;
+
+                Time eta = new Time(Int32.Parse(etaHours), Int32.Parse(etaMin));
 
                 // hf dealing with those strings
             }
