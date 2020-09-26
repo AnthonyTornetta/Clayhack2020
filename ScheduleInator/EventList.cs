@@ -18,11 +18,17 @@ namespace ScheduleInator
 
         public void OrderEvents()
         {
+            bool SwapEvent = false;
             for (int i = 0; i < events.Count; i++)
             {
                 for (int j = i - 1; j > 0; j--)
                 {
-                    if (events[j - 1].StartTime > events[j].StartTime)
+                    if (events[j - 1].StartTime.Hours > events[j].StartTime.Hours)
+                        SwapEvent = true;
+                    else if ((events[j - 1].StartTime.Hours == events[j].StartTime.Hours) && (events[j - 1].StartTime.Minutes > events[j].StartTime.Minutes))
+                        SwapEvent = true;
+
+                    if (SwapEvent)
                     {
                         Event temp = events[j - 1];
                         events[j - 1] = events[j];
