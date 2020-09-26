@@ -14,9 +14,17 @@ namespace ScheduleInator
     {
         public List<Event> events;
 
+
         public EventList(List<Event> ev)
         {
             events = ev;
+        }
+
+        public void Add(Event e)
+        {
+            AddPreDeterminedEvent(e);
+            AddDueDated(e);
+            AddETATimed(e);
         }
 
         public void AddPreDeterminedEvent(Event e)
@@ -110,6 +118,33 @@ namespace ScheduleInator
                 }
             }
         }
+
+        public void PartitionEvents()
+        {
+            List<Event> predetermined = new List<Event>();
+            List<Event> dueDated = new List<Event>();
+            List<Event> etaTimed = new List<Event>();
+            List<Event> autofilled = new List<Event>();
+
+            for (int i = 0; i < events.Count; i++)
+            {
+                if (events[i].SpecifiedTime != null
+                    predetermined.Add(events[i]);
+                else if (events[i].dueDate != null)
+                    dueDated.Add(events[i]);
+                else if (events[i].SpecifiedTime.StartTime == null && events[i].SpecifiedTime.EndTime == null)
+                    etaTimed.Add(events[i]);
+                else
+                    autofilled.Add(events[i]);
+
+                events.Clear();
+                events.TrimExcess();
+                events.AddRange(predetermined);
+                events.AddRange(dueDated);
+                events.AddRange(etaTimed);
+                events.AddRange(autofilled);
+
+            }
+        }
     }
 }
-//make sure eta is not too large
