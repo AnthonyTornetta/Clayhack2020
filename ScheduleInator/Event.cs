@@ -6,21 +6,27 @@ using System.Threading.Tasks;
 
 namespace ScheduleInator
 {
-    class Event
+    public class Event
     {
         private int startTime { get; set; }
         private int endTime { get; set; }
         private string name { get; set; }
         private string type { get; set; }
-        private int dueDate { get; set; }
+        private CustomTime specifiedTime;
+        private CustomTime dueDate;
 
-        public Event(int startTime, int endTime, string name, string type, int dueDate, CustomTime customTime)
+        public Event(int startTime, int endTime, string name, string type, int dueDate, CustomTime specifiedTime,CustomTime dueDate )
         {
             this.startTime = startTime;
             this.endTime = endTime;
             this.name = name;
             this.type = type;
             this.dueDate = dueDate;
+        }
+
+        public ModifyTime(int day, Time time)
+        {
+            this.specifiedTime.addTimeToDay(day, time)
         }
     }
 }
