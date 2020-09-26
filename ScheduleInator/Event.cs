@@ -26,7 +26,7 @@ namespace ScheduleInator
 
         public void ModifyTime(int day, Time time)
         {
-            this.specifiedTime.addTimeToDay(day, time)
+            this.specifiedTime.addTimeToDay(day, time);
         }
     }
 }
