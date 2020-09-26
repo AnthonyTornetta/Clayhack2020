@@ -16,7 +16,7 @@ namespace ScheduleInator
             events = e;
         }
 
-        public void orderEvents()
+        public void OrderEvents()
         {
             for (int i = 0; i < events.Count; i++)
             {
