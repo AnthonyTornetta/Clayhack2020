@@ -25,7 +25,7 @@ namespace ScheduleInator
                 {
                     if (events[j - 1].StartTime.Hours > events[j].StartTime.Hours)
                         SwapEvent = true;
-                    else if ((events[j - 1].StartTime.Hours == events[j].StartTime.Hours) && (events[j - 1].StartTime.Minutes > events[j].StartTime.Minutes))
+                    else if ((events[j - 1].StartTime.Hours == events[j].StartTime.Hours) && (events[j - 1].StartTime.Hours > events[j].StartTime.Hours))
                         SwapEvent = true;
 
                     if (SwapEvent)
